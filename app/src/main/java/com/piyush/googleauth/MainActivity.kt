@@ -1,5 +1,6 @@
 package com.piyush.googleauth
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.IntentSenderRequest
@@ -41,10 +42,22 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        if(viewModel.currentUser()!= null){
+            startActivity(
+                Intent(
+                    this@MainActivity, SecondActivity::class.java
+                )
+            )
+        }
+
         lifecycleScope.launch {
             viewModel.state.collect{
                 state -> if(state.isSignInSuccessful){
-                    Snackbar.make(binding.root,"Sign in successful",Snackbar.LENGTH_SHORT).show()
+                    startActivity(
+                        Intent(
+                            this@MainActivity, SecondActivity::class.java
+                        )
+                    )
                     viewModel.resetState()
                 }
 

@@ -3,4 +3,5 @@
     <string name="firebase_google_sign_in">Firebase google sign in</string>
     <string name="bottom_sheet_google_sign_in">Bottom sheet google sign in</string>
     <string name="oauth_client">459819823859-kg35cvdja3j49f45sf2tk157kugktg1d.apps.googleusercontent.com</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
