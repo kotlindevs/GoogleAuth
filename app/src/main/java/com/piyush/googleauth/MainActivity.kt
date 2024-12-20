@@ -3,10 +3,8 @@
 package com.piyush.googleauth
 
 import android.content.Intent
-import android.credentials.GetCredentialException
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.IntentSenderRequest
@@ -39,7 +37,6 @@ import java.util.UUID
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel : BottomSheetAuthenticationViewModel
     private lateinit var repository : BottomSheetAuthenticationRepository
@@ -134,8 +131,9 @@ class MainActivity : AppCompatActivity() {
                         context = this@MainActivity
                     )
                    repository.handleCredentials(result = result)
-                }catch (exception : GetCredentialException){
-                    Log.e(TAG,"onStart: ",exception)
+                }catch (exception : Exception){
+                    exception.printStackTrace()
+                    Snackbar.make(binding.root,"Sign in failed",Snackbar.LENGTH_SHORT).show()
                 }
             }
         }
