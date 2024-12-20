@@ -3,22 +3,30 @@ package com.piyush.googleauth.authentication
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
+import android.util.Log
+import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialResponse
+import androidx.credentials.PasswordCredential
+import androidx.credentials.PublicKeyCredential
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.piyush.googleauth.R
+import com.piyush.googleauth.SecondActivity
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.tasks.await
 
 class BottomSheetAuthenticationRepository(
     private val context: Context
 ) {
-
+    private val TAG = "BottomSheetAuthRepo"
     private val oneTapClient : SignInClient = Identity.getSignInClient(context)
     private val auth : FirebaseAuth = Firebase.auth
 
@@ -91,6 +99,38 @@ class BottomSheetAuthenticationRepository(
         }catch (exception : Exception){
             exception.printStackTrace()
             if(exception is CancellationException) throw exception
+        }
+    }
+
+    suspend fun handleCredentials(result : GetCredentialResponse){
+        val credential = result.credential
+
+        when(credential){
+            is PublicKeyCredential -> {
+                credential.authenticationResponseJson
+            }
+
+            is PasswordCredential -> {}
+
+            is CustomCredential -> {
+                if(credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL){
+                    try{
+                        val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
+                        val googleIdToken = googleIdTokenCredential.idToken
+                        val authCredential = GoogleAuthProvider.getCredential(googleIdToken,null)
+                        val user = auth.signInWithCredential(authCredential).await().user
+                        user?.run {
+                            context.startActivity(
+                                Intent(
+                                    context,SecondActivity::class.java
+                                )
+                            )
+                        }
+                    }catch (exception : GoogleIdTokenParsingException){
+                        Log.e(TAG, "handleCredentials: ",exception)
+                    }
+                }
+            }
         }
     }
 

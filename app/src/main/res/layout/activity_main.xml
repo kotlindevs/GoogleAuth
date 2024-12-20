@@ -28,4 +28,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/firebaseGoogleSignIn"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bottomSheetCredentialManager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bottom_sheet_credential_manager"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetGoogleSignIn"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
