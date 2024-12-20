@@ -7,6 +7,7 @@ import android.credentials.GetCredentialException
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -66,6 +67,8 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     override fun onStart() {
         super.onStart()
+
+        onBackPressedDispatcher.addCallback {  }
 
         val rawNonce = UUID.randomUUID().toString()
         val bytes = rawNonce.toByteArray()
