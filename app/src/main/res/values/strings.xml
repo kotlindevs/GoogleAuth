@@ -5,4 +5,5 @@
     <string name="oauth_client">459819823859-kg35cvdja3j49f45sf2tk157kugktg1d.apps.googleusercontent.com</string>
     <string name="sign_out">Sign Out</string>
     <string name="bottom_sheet_credential_manager">Bottom sheet credential manager</string>
+    <string name="google_sign_in_android">Google Sign In Android</string>
 </resources>

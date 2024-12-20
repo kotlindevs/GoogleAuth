@@ -7,13 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/google_sign_in_android"
+        android:layout_marginTop="32dp"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        app:fontFamily="@font/ubuntu_mono"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/firebaseGoogleSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/firebase_google_sign_in"
+        android:fontFamily="@font/ubuntu_mono"
         android:layout_marginBottom="6dp"
         app:icon="@drawable/ic_login"
+        android:textStyle="bold"
         app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
         style="@style/Widget.Material3.Button.Icon"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bottom_sheet_google_sign_in"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textStyle="bold"
         android:layout_marginTop="6dp"
         app:icon="@drawable/ic_login"
         app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
@@ -39,6 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bottom_sheet_credential_manager"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textStyle="bold"
         android:layout_marginTop="6dp"
         app:icon="@drawable/ic_login"
         app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Large"
